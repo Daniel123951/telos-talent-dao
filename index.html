@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telos Talent DAO - Decentralized Freelancing Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .nft-glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+    </style>
+</head>
+<body class="h-full bg-gray-50 font-sans">
+    <div id="app" class="min-h-full">
+        <!-- Header -->
+        <header class="gradient-bg shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">Telos Talent DAO</h1>
+                            <p class="text-purple-100 text-sm">Decentralized Freelancing</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <div class="hidden md:flex items-center space-x-2 bg-white/20 rounded-lg px-3 py-2">
+                            <span class="text-white text-sm">Network:</span>
+                            <span class="text-green-300 font-semibold">Telos EVM</span>
+                        </div>
+                        <button id="connectWallet" class="bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Connect Wallet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-8">
+                    <button class="nav-btn py-4 px-2 border-b-2 border-purple-500 text-purple-600 font-medium" data-tab="dashboard">
+                        📊 Dashboard
+                    </button>
+                    <button class="nav-btn py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700" data-tab="tasks">
+                        📋 Tasks
+                    </button>
+                    <button class="nav-btn py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700" data-tab="reputation">
+                        🏆 Reputation NFT
+                    </button>
+                    <button class="nav-btn py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700" data-tab="governance">
+                        🗳️ DAO Governance
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Stats Cards -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Total Balance</p>
+                                <p class="text-2xl font-bold text-gray-900">1,250 TLOS</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl">💰</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Tasks Completed</p>
+                                <p class="text-2xl font-bold text-gray-900">47</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl">✅</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Reputation Level</p>
+                                <p class="text-2xl font-bold text-gray-900">Expert</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Voting Power</p>
+                                <p class="text-2xl font-bold text-gray-900">850</p>
+                            </div>
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <span class="text-2xl">🗳️</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">Task completed: Smart Contract Development</p>
+                                <p class="text-sm text-gray-500">2 hours ago • +150 TLOS</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <span class="text-blue-600">🏆</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">Reputation NFT updated</p>
+                                <p class="text-sm text-gray-500">5 hours ago • Expert level reached</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Tab -->
+            <div id="tasks" class="tab-content hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Task Marketplace</h2>
+                    <button id="createTaskBtn" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        + Create Task
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- Task Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Development</span>
+                            <span class="text-lg font-bold text-purple-600">250 TLOS</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">DeFi Smart Contract</h3>
+                        <p class="text-gray-600 text-sm mb-4">Need to develop a smart contract for a DeFi protocol on Telos EVM with staking and rewards functions.</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-blue-500 rounded-full"></div>
+                                <span class="text-sm text-gray-500">Verified client</span>
+                            </div>
+                            <button class="bg-purple-100 text-purple-600 px-4 py-2 rounded-lg text-sm hover:bg-purple-200 transition-colors">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Design</span>
+                            <span class="text-lg font-bold text-purple-600">100 TLOS</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">DApp UI/UX Design</h3>
+                        <p class="text-gray-600 text-sm mb-4">Design modern and functional interface for decentralized trading application on Telos.</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-gray-500">Premium client</span>
+                            </div>
+                            <button class="bg-purple-100 text-purple-600 px-4 py-2 rounded-lg text-sm hover:bg-purple-200 transition-colors">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Marketing</span>
+                            <span class="text-lg font-bold text-purple-600">75 TLOS</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Social Media Content</h3>
+                        <p class="text-gray-600 text-sm mb-4">Create educational content about Telos blockchain for Twitter and LinkedIn for 1 week.</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-yellow-500 rounded-full"></div>
+                                <span class="text-sm text-gray-500">New client</span>
+                            </div>
+                            <button class="bg-purple-100 text-purple-600 px-4 py-2 rounded-lg text-sm hover:bg-purple-200 transition-colors">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reputation NFT Tab -->
+            <div id="reputation" class="tab-content hidden">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Your Reputation NFT</h2>
+                    <p class="text-gray-600">Your reputation is represented as a dynamic NFT that evolves with your performance</p>
+                </div>
+
+                <div class="max-w-md mx-auto mb-8">
+                    <div class="bg-gradient-to-br from-purple-400 to-blue-500 rounded-2xl p-8 text-white nft-glow">
+                        <div class="text-center">
+                            <div class="w-24 h-24 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
+                                <span class="text-4xl">⭐</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">Expert Developer</h3>
+                            <p class="text-purple-100 mb-4">Level 4 • 850 Reputation Points</p>
+                            <div class="bg-white/20 rounded-lg p-4">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span>Progress to next level</span>
+                                    <span>850/1000</span>
+                                </div>
+                                <div class="w-full bg-white/20 rounded-full h-2">
+                                    <div class="bg-white h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">✅</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Tasks Completed</h4>
+                        <p class="text-3xl font-bold text-green-600">47</p>
+                        <p class="text-sm text-gray-500">100% success rate</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">⭐</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Average Rating</h4>
+                        <p class="text-3xl font-bold text-blue-600">4.9</p>
+                        <p class="text-sm text-gray-500">Out of 5.0 stars</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-2xl">🏆</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Specialties</h4>
+                        <p class="text-lg font-bold text-purple-600">Smart Contracts</p>
+                        <p class="text-sm text-gray-500">DeFi, NFTs, DAOs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Governance DAO Tab -->
+            <div id="governance" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">DAO Governance</h2>
+                    <p class="text-gray-600">Participate in platform decisions using your reputation-based voting power</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h3 class="font-semibold text-gray-900 mb-2">Your Voting Power</h3>
+                        <p class="text-3xl font-bold text-purple-600 mb-2">850</p>
+                        <p class="text-sm text-gray-500">Based on your reputation NFT</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h3 class="font-semibold text-gray-900 mb-2">Active Proposals</h3>
+                        <p class="text-3xl font-bold text-blue-600 mb-2">3</p>
+                        <p class="text-sm text-gray-500">Awaiting your vote</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h3 class="font-semibold text-gray-900 mb-2">Participation</h3>
+                        <p class="text-3xl font-bold text-green-600 mb-2">92%</p>
+                        <p class="text-sm text-gray-500">In past votes</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Proposal 1 -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Reduce platform fee to 3%</h3>
+                                <p class="text-gray-600 text-sm">Proposal to reduce current 5% fee to 3% to incentivize more participation.</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>For: 67%</span>
+                                <span>Against: 33%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 67%"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-3">
+                            <button class="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Vote For
+                            </button>
+                            <button class="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                Vote Against
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Proposal 2 -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-semibold text-gray-900 mb-2">Implement automated dispute system</h3>
+                                <p class="text-gray-600 text-sm">Create an automated system to resolve minor disputes using oracles and AI.</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>For: 45%</span>
+                                <span>Against: 55%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-3">
+                            <button class="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors">
+                                Vote For
+                            </button>
+                            <button class="flex-1 bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                Vote Against
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Create Task Modal -->
+        <div id="createTaskModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Create New Task</h3>
+                    <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+                        <span class="text-2xl">×</span>
+                    </button>
+                </div>
+
+                <form id="createTaskForm" class="space-y-4">
+                    <div>
+                        <label for="taskTitle" class="block text-sm font-medium text-gray-700 mb-2">Task title</label>
+                        <input type="text" id="taskTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="e.g. Develop smart contract">
+                    </div>
+
+                    <div>
+                        <label for="taskCategory" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                        <select id="taskCategory" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            <option value="">Select category</option>
+                            <option value="development">Development</option>
+                            <option value="design">Design</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="writing">Writing</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="taskDescription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="taskDescription" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Describe the task details..."></textarea>
+                    </div>
+
+                    <div>
+                        <label for="taskPayment" class="block text-sm font-medium text-gray-700 mb-2">Payment (TLOS)</label>
+                        <input type="number" id="taskPayment" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="100">
+                    </div>
+
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" id="cancelTask" class="flex-1 px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
+                            Create Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Wallet Connection Status -->
+        <div id="walletStatus" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 hidden">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 bg-green-500 rounded-full pulse-animation"></div>
+                <div>
+                    <p class="font-medium text-gray-900">Wallet Connected</p>
+                    <p class="text-sm text-gray-500">0x1234...5678</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Navigation
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+                
+                // Update nav buttons
+                navButtons.forEach(btn => {
+                    btn.classList.remove('border-purple-500', 'text-purple-600');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                });
+                button.classList.remove('border-transparent', 'text-gray-500');
+                button.classList.add('border-purple-500', 'text-purple-600');
+                
+                // Update tab content
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.getElementById(targetTab).classList.remove('hidden');
+            });
+        });
+
+        // Wallet Connection
+        const connectWalletBtn = document.getElementById('connectWallet');
+        const walletStatus = document.getElementById('walletStatus');
+
+        connectWalletBtn.addEventListener('click', () => {
+            // Simulate wallet connection
+            connectWalletBtn.textContent = 'Connecting...';
+            connectWalletBtn.disabled = true;
+            
+            setTimeout(() => {
+                connectWalletBtn.textContent = 'Connected ✓';
+                connectWalletBtn.classList.remove('bg-white', 'text-purple-600');
+                connectWalletBtn.classList.add('bg-green-500', 'text-white');
+                walletStatus.classList.remove('hidden');
+            }, 2000);
+        });
+
+        // Create Task Modal
+        const createTaskBtn = document.getElementById('createTaskBtn');
+        const createTaskModal = document.getElementById('createTaskModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelTask = document.getElementById('cancelTask');
+        const createTaskForm = document.getElementById('createTaskForm');
+
+        createTaskBtn.addEventListener('click', () => {
+            createTaskModal.classList.remove('hidden');
+            createTaskModal.classList.add('flex');
+        });
+
+        closeModal.addEventListener('click', () => {
+            createTaskModal.classList.add('hidden');
+            createTaskModal.classList.remove('flex');
+        });
+
+        cancelTask.addEventListener('click', () => {
+            createTaskModal.classList.add('hidden');
+            createTaskModal.classList.remove('flex');
+        });
+
+        createTaskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('taskTitle').value;
+            const category = document.getElementById('taskCategory').value;
+            const description = document.getElementById('taskDescription').value;
+            const payment = document.getElementById('taskPayment').value;
+            
+            if (title && category && description && payment) {
+                // Simulate task creation
+                alert('Task created successfully! Payment has been deposited in escrow.');
+                createTaskModal.classList.add('hidden');
+                createTaskModal.classList.remove('flex');
+                createTaskForm.reset();
+            } else {
+                alert('Please complete all fields');
+            }
+        });
+
+        // Voting functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.textContent.includes('Votar A Favor') || e.target.textContent.includes('Votar En Contra')) {
+                const voteType = e.target.textContent.includes('A Favor') ? 'a favor' : 'en contra';
+                e.target.textContent = 'Votando...';
+                e.target.disabled = true;
+                
+                setTimeout(() => {
+                    e.target.textContent = `Votado ${voteType} ✓`;
+                    e.target.classList.remove('bg-green-600', 'bg-red-600', 'hover:bg-green-700', 'hover:bg-red-700');
+                    e.target.classList.add('bg-gray-500');
+                }, 1500);
+            }
+        });
+
+        // Task application
+        document.addEventListener('click', (e) => {
+            if (e.target.textContent === 'Aplicar') {
+                e.target.textContent = 'Aplicando...';
+                e.target.disabled = true;
+                
+                setTimeout(() => {
+                    e.target.textContent = 'Aplicado ✓';
+                    e.target.classList.remove('bg-purple-100', 'text-purple-600', 'hover:bg-purple-200');
+                    e.target.classList.add('bg-green-100', 'text-green-600');
+                }, 1500);
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'991c45cc63a4e564',t:'MTc2MTAwMjcwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
